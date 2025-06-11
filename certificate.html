@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificates - Deepak Venugopal</title>
+    <style>
+        :root {
+            --dark-bg: #0a0e17;
+            --darker-bg: #060a12;
+            --accent: #00ff8c;
+            --secondary-accent: #0073ff;
+            --text: #e0e0e0;
+            --section-bg: rgba(16, 26, 46, 0.6);
+            --card-bg: rgba(22, 36, 60, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(10, 14, 23, 0.97), rgba(10, 14, 23, 0.97)),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%230073ff' fill-opacity='0.05'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+        }
+        
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,255,140,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,140,0.03) 1px, transparent 1px);
+            background-size: 25px 25px;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--darker-bg);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .main-content {
+            padding: 80px 0;
+            min-height: 80vh;
+        }
+        
+        .page-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--accent);
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .page-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 60px;
+        }
+        
+        .certificates-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .certificate-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(0, 255, 140, 0.2);
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .certificate-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+        
+        .certificate-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(0, 255, 140, 0.3);
+            transition: border-color 0.3s;
+        }
+        
+        .certificate-card:hover .certificate-image {
+            border-color: var(--accent);
+        }
+        
+        .certificate-info {
+            margin-top: 20px;
+        }
+        
+        .certificate-title {
+            font-size: 24px;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .certificate-issuer {
+            font-size: 18px;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .certificate-date {
+            font-size: 16px;
+            color: #b0b0b0;
+            margin-bottom: 10px;
+        }
+        
+        .certificate-id {
+            font-size: 14px;
+            color: var(--secondary-accent);
+            font-family: 'Courier New', monospace;
+            background-color: rgba(0, 115, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin-bottom: 40px;
+        }
+        
+        .back-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background-color: var(--accent);
+            transition: all 0.3s;
+            z-index: -1;
+        }
+        
+        .back-btn:hover {
+            color: #000;
+        }
+        
+        .back-btn:hover:before {
+            left: 0;
+        }
+        
+        footer {
+            background-color: var(--darker-bg);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 255, 140, 0.2);
+        }
+        
+        .copyright {
+            font-size: 14px;
+            color: #707070;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-title {
+                font-size: 36px;
+            }
+            
+            .certificate-card {
+                margin: 20px;
+                padding: 20px;
+            }
+            
+            .certificate-title {
+                font-size: 20px;
+            }
+            
+            .certificate-issuer {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .certificate-card {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-pattern"></div>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">&#128274;</div>
+                <div class="logo-text">DV</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#skills">Skills</a></li>
+                    <li><a href="index.html#experience">Experience</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="certificates.html">Certificates</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <a href="index.html" class="back-btn">← Back to Home</a>
+            
+            <h1 class="page-title">My Certificates</h1>
+            <p class="page-subtitle">Professional certifications and achievements in cybersecurity</p>
+            
+            <div class="certificates-container">
+                <div class="certificate-card">
+                    <img src="image.png" alt="Certified Ethical Hacker v13 Certificate" class="certificate-image">
+                    <div class="certificate-info">
+                        <h3 class="certificate-title">Certified Ethical Hacker (CEHv13)</h3>
+                        <p class="certificate-issuer">EC-Council</p>
+                        <p class="certificate-date">March 2025</p>
+                        <div class="certificate-id">Certification #: ECC3601492785</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2025 Deepak Venugopal. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Add smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add loading animation for certificate image
+        document.addEventListener('DOMContentLoaded', function() {
+            const certImage = document.querySelector('.certificate-image');
+            if (certImage) {
+                certImage.addEventListener('load', function() {
+                    this.style.opacity = '1';
+                });
+                
+                certImage.addEventListener('error', function() {
+                    // Fallback if image doesn't load
+                    this.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                        width: 100%;
+                        height: 300px;
+                        background-color: rgba(0, 255, 140, 0.1);
+                        border: 2px dashed var(--accent);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: var(--accent);
+                        font-size: 18px;
+                        border-radius: 8px;
+                        margin-bottom: 20px;
+                    `;
+                    fallback.textContent = 'Certificate Image Not Available';
+                    this.parentNode.insertBefore(fallback, this);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
